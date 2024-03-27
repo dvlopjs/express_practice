@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Express practice</title>
+  </head>
+  <style>
+    .image {
+      height: auto;
+      max-width: "100%";
+      width: 320px;
+    }
+  </style>
+  <body>
+    <main></main>
+    <script type="module">
+      fetch("http://localhost:3001/movies")
+        .then((res) => res.json())
+        .then((movies) => {
+          const html = movies
+            .map((m, i) => {
+              return `<article data-id=${m.id}>
+                <h2>${m.title}</h2>
+                <img class="image" src=${m.poster}></img>
+                <p>Rate: ${m.rate}</p>
+                </article>`;
+            })
+            .join("");
+          document.querySelector("main").innerHTML = html;
+        });
+    </script>
+  </body>
+</html>
